@@ -1,0 +1,34 @@
+﻿services:
+  api:
+    build: .   # <- adiciona esta linha para construir a imagem local
+    container_name: catalogo-api-final-novo
+    depends_on:
+      - mysql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5005:8080"
+    networks:
+      - apicatalogo-net
+
+  mysql:
+    image: mysql:latest
+    container_name: apicatalogo-mysql-novo
+    environment:
+      MYSQL_ROOT_PASSWORD: SecretPassword01
+      MYSQL_DATABASE: catalogodb
+    volumes:
+      - catalogodb-data:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    networks:
+      - apicatalogo-net
+
+networks:
+  apicatalogo-net:
+    driver: bridge
+
+volumes:
+  catalogodb-data:
+    external: true
+    name: bfa21fc88ab708197a65ced87127a6708f5273b9a24fd8511ab9c775d9c7d61c

@@ -1,0 +1,9 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# Arquivos de configuração de ambiente
+appsettings.Development.json
