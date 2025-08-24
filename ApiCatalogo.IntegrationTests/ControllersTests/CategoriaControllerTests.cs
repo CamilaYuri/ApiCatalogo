@@ -1,31 +1,36 @@
 ﻿using ApiCatalogo.IntegrationTests.Factories;
-using ApiCatalogo.IntegrationTests.Fixtures;
 using APICatalogo.Models;
 using FluentAssertions;
 using System.Net.Http.Json;
+using Microsoft.Extensions.DependencyInjection;
+using APICatalogo.Context;
 
 namespace ApiCatalogo.IntegrationTests.ControllersTests
 {
-    [Collection("Database")]
-    public class CategoriaControllerTests : IClassFixture<DbFixture>
+    public class CategoriaControllerTests : IClassFixture<ApiCatalogoFactory>
     {
         private readonly HttpClient _client;
-        private readonly DbFixture _dbFixture;
+        private readonly ApiCatalogoFactory _factory;
 
-        public CategoriaControllerTests(DbFixture dbFixture)
+        public CategoriaControllerTests(ApiCatalogoFactory factory)
         {
-            _dbFixture = dbFixture;
-            var factory = new ApiCatalogoFactory(_dbFixture);
+            _factory = factory;
             _client = factory.CreateClient();
         }
 
         private async Task DeleteCategoriaAsync(int id)
         {
-            var categoria = await _dbFixture.AppDbContext.Categorias.FindAsync(id);
-            if (categoria != null)
+            using (var scope = _factory.Services.CreateScope())
             {
-                _dbFixture.AppDbContext.Categorias.Remove(categoria);
-                await _dbFixture.AppDbContext.SaveChangesAsync();
+                var scopedServices = scope.ServiceProvider;
+                var appDb = scopedServices.GetRequiredService<AppDbContext>();
+
+                var categoria = await appDb.Categorias.FindAsync(id);
+                if (categoria != null)
+                {
+                    appDb.Categorias.Remove(categoria);
+                    await appDb.SaveChangesAsync();
+                }
             }
         }
 

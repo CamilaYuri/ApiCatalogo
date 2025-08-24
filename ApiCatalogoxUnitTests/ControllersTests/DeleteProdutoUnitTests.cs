@@ -11,7 +11,7 @@ public class DeleteProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
 
     public DeleteProdutoUnitTests(ProdutosUnitTestController controller)
     {
-        _controller = new ProdutosController(controller.context);
+        _controller = new ProdutosController(controller.Context);
     }
 
     [Fact]
@@ -19,6 +19,7 @@ public class DeleteProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
     {
         var novoProduto = new Produto
         {
+            ProdutoId = 10,
             Nome = "Novo Produto",
             Descricao = "Descrição do Novo Produto",
             Preco = 10.99m,

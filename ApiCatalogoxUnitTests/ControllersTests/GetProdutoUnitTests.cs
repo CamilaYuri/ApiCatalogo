@@ -12,7 +12,7 @@ public class GetProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
 
     public GetProdutoUnitTests(ProdutosUnitTestController controller)
     {
-        _controller = new ProdutosController(controller.context);
+        _controller = new ProdutosController(controller.Context);
     }
 
     [Fact]

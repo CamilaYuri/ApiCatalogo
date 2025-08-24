@@ -11,7 +11,7 @@ public class PostProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
 
     public PostProdutoUnitTests(ProdutosUnitTestController controller)
     {
-        _controller = new ProdutosController(controller.context);
+        _controller = new ProdutosController(controller.Context);
     }
 
     [Fact]
@@ -19,6 +19,7 @@ public class PostProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
     {
         var novoProduto = new Produto
         {
+            ProdutoId = 30,
             Nome = "Novo Produto",
             Descricao = "Descrição do Novo Produto",
             Preco = 10.99m,
@@ -40,7 +41,7 @@ public class PostProdutoUnitTests : IClassFixture<ProdutosUnitTestController>
         var data = await _controller.Post(novoProduto);
 
         var createdResult = data.Result.Should().BeOfType<BadRequestResult>();
-        createdResult.Subject.StatusCode.Should().Be(400);
+        data.Result.Should().BeOfType<BadRequestResult>();
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿services:
   api:
-    build: .   # <- adiciona esta linha para construir a imagem local
+    build: .
     container_name: catalogo-api-final-novo
     depends_on:
       - mysql
@@ -24,6 +24,21 @@
     networks:
       - apicatalogo-net
 
+
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile-jenkins
+    container_name: my-jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - apicatalogo-net
+
 networks:
   apicatalogo-net:
     driver: bridge
@@ -32,3 +47,4 @@ volumes:
   catalogodb-data:
     external: true
     name: bfa21fc88ab708197a65ced87127a6708f5273b9a24fd8511ab9c775d9c7d61c
+  jenkins_home:

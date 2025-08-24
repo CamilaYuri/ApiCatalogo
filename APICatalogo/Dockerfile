@@ -12,9 +12,6 @@ COPY --from=build-env /app/out .
 
 RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists/*
 
-COPY wait-for-mysql.sh /wait-for-mysql.sh
-RUN chmod +x /wait-for-mysql.sh
-
 EXPOSE 8080
 
-ENTRYPOINT ["/wait-for-mysql.sh", "mysql", "dotnet", "APICatalogo.dll"]
+ENTRYPOINT ["dotnet", "APICatalogo.dll"]

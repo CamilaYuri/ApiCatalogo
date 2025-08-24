@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APICatalogo", "APICatalogo\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCatalogoxUnitTests", "ApiCatalogoxUnitTests\ApiCatalogoxUnitTests.csproj", "{80AFA40A-39B5-47BD-9702-DAE234D18221}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCatalogo.IntegrationTests", "ApiCatalogo.IntegrationTests\ApiCatalogo.IntegrationTests.csproj", "{D4547943-BCF7-48F8-93BA-F4A1AEEA51ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCatalogo.IntegrationTests", "ApiCatalogo.IntegrationTests\ApiCatalogo.IntegrationTests.csproj", "{D4547943-BCF7-48F8-93BA-F4A1AEEA51ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CFD5B69-9D52-4203-97BC-2DAD33D961C4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Jenkinsfile = Jenkinsfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
